@@ -4,7 +4,7 @@
 GLOBAL_LIST_EMPTY(radial_menus)
 
 /obj/screen/radial
-	icon = 'icons/mob/radial.dmi'
+	icon = 'icons/hud/radial.dmi'
 	layer = ABOVE_HUD_LAYER
 	plane = ABOVE_HUD_PLANE
 	var/datum/radial_menu/parent
@@ -195,6 +195,9 @@ GLOBAL_LIST_EMPTY(radial_menus)
 	else
 		if(istext(choices_values[choice_id]))
 			E.name = choices_values[choice_id]
+		else if(ispath(choices_values[choice_id],/atom))
+			var/atom/A = choices_values[choice_id]
+			E.name = initial(A.name)
 		else
 			var/atom/movable/AM = choices_values[choice_id] //Movables only
 			E.name = AM.name
@@ -314,7 +317,7 @@ GLOBAL_LIST_EMPTY(radial_menus)
 	GLOB.radial_menus -= uniqueid
 	if(require_near && !in_range(anchor, user))
 		return
-	if(menu.custom_check_callback)
-		if(!menu.custom_check_callback.Invoke())
+	if(istype(custom_check))
+		if(!custom_check.Invoke())
 			return
 	return answer

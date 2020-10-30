@@ -1,9 +1,12 @@
 import { NtosWindow } from '../layouts';
 import { AiRestorerContent } from './AiRestorer';
 
-export const AiRestorer = () => {
+export const NtosAiRestorer = () => {
   return (
-    <NtosWindow resizable>
+    <NtosWindow
+      width={370}
+      height={400}
+      resizable>
       <NtosWindow.Content scrollable>
         <AiRestorerContent />
       </NtosWindow.Content>
